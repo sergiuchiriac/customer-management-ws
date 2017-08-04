@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+  <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=paperless;integratedSecurity=true;</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+  <property name="hibernate.connection.isolation">2</property>
+  <property name="hibernate.default_schema">dbo</property>
+  <property name="hibernate.current_session_context_class">thread</property>
+  <mapping class="com.multicert.services.entities.Client"/>
+ </session-factory>
+</hibernate-configuration>

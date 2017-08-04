@@ -1,0 +1,69 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ClientWSService WSDL service -->
+
+  <service name="ClientWS" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services"/>
+      <parameter name="wsdlServiceElement" value="ClientWSService"/>
+      <parameter name="schemaQualified" value="http://common,http://services,http://response"/>
+      <parameter name="wsdlServicePort" value="ClientWS"/>
+      <parameter name="className" value="services.ClientWSSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ClientWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="deleteClient" qname="operNS:deleteClient" xmlns:operNS="http://services" returnQName="retNS:deleteClientReturn" xmlns:retNS="http://services" returnType="rtns:APIResponse" xmlns:rtns="http://common" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://services" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="searchClient" qname="operNS:searchClient" xmlns:operNS="http://services" returnQName="retNS:searchClientReturn" xmlns:retNS="http://services" returnType="rtns:ClientResponse" xmlns:rtns="http://response" soapAction="" >
+        <parameter qname="pns:nome" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nif" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addClient" qname="operNS:addClient" xmlns:operNS="http://services" returnQName="retNS:addClientReturn" xmlns:retNS="http://services" returnType="rtns:APIResponse" xmlns:rtns="http://common" soapAction="" >
+        <parameter qname="pns:client" xmlns:pns="http://services" type="tns:ClientElement" xmlns:tns="http://services"/>
+      </operation>
+      <operation name="getClients" qname="operNS:getClients" xmlns:operNS="http://services" returnQName="retNS:getClientsReturn" xmlns:retNS="http://services" returnType="rtns:ClientResponse" xmlns:rtns="http://response" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="deleteClient addClient searchClient getClients"/>
+
+      <typeMapping
+        xmlns:ns="http://services"
+        qname="ns:ClientElement"
+        type="java:services.ClientElement"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://services"
+        qname="ns:ArrayOfClientElement"
+        type="java:services.ClientElement[]"
+        innerType="cmp-ns:ClientElement" xmlns:cmp-ns="http://services"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://common"
+        qname="ns:APIResponse"
+        type="java:common.APIResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://response"
+        qname="ns:ClientResponse"
+        type="java:response.ClientResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

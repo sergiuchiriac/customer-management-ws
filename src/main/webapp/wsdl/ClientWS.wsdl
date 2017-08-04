@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services" xmlns:intf="http://services" xmlns:tns1="http://common" xmlns:tns2="http://response" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://response"/>
+   <import namespace="http://common"/>
+   <element name="deleteClient">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteClientResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteClientReturn" type="tns1:APIResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchClient">
+    <complexType>
+     <sequence>
+      <element name="nome" type="xsd:string"/>
+      <element name="nif" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchClientResponse">
+    <complexType>
+     <sequence>
+      <element name="searchClientReturn" type="tns2:ClientResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ClientElement">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="morada" nillable="true" type="xsd:string"/>
+     <element name="nif" nillable="true" type="xsd:string"/>
+     <element name="nome" nillable="true" type="xsd:string"/>
+     <element name="telefone" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfClientElement">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ClientElement"/>
+    </sequence>
+   </complexType>
+   <element name="addClient">
+    <complexType>
+     <sequence>
+      <element name="client" type="impl:ClientElement"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addClientResponse">
+    <complexType>
+     <sequence>
+      <element name="addClientReturn" type="tns1:APIResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getClients">
+    <complexType/>
+   </element>
+   <element name="getClientsResponse">
+    <complexType>
+     <sequence>
+      <element name="getClientsReturn" type="tns2:ClientResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://common" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://response"/>
+   <import namespace="http://services"/>
+   <complexType name="APIResponse">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:string"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+     <element name="success" nillable="true" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://response" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://services"/>
+   <import namespace="http://common"/>
+   <complexType name="ClientResponse">
+    <complexContent>
+     <extension base="tns1:APIResponse">
+      <sequence>
+       <element name="clientElement" nillable="true" type="impl:ArrayOfClientElement"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="searchClientResponse">
+
+      <wsdl:part element="impl:searchClientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addClientRequest">
+
+      <wsdl:part element="impl:addClient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getClientsResponse">
+
+      <wsdl:part element="impl:getClientsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteClientRequest">
+
+      <wsdl:part element="impl:deleteClient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteClientResponse">
+
+      <wsdl:part element="impl:deleteClientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getClientsRequest">
+
+      <wsdl:part element="impl:getClients" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchClientRequest">
+
+      <wsdl:part element="impl:searchClient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addClientResponse">
+
+      <wsdl:part element="impl:addClientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ClientWS">
+
+      <wsdl:operation name="deleteClient">
+
+         <wsdl:input message="impl:deleteClientRequest" name="deleteClientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteClientResponse" name="deleteClientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchClient">
+
+         <wsdl:input message="impl:searchClientRequest" name="searchClientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchClientResponse" name="searchClientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addClient">
+
+         <wsdl:input message="impl:addClientRequest" name="addClientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addClientResponse" name="addClientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getClients">
+
+         <wsdl:input message="impl:getClientsRequest" name="getClientsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getClientsResponse" name="getClientsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ClientWSSoapBinding" type="impl:ClientWS">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="deleteClient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteClientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteClientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchClient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchClientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchClientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addClient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addClientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addClientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getClients">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getClientsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getClientsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ClientWSService">
+
+      <wsdl:port binding="impl:ClientWSSoapBinding" name="ClientWS">
+
+         <wsdlsoap:address location="http://localhost:8081/webservices/services/ClientWS"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

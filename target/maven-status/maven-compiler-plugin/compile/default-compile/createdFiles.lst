@@ -1,0 +1,7 @@
+entities\Client.class
+response\ClientResponse.class
+dao\HibernateUtil.class
+dao\ClientDAO.class
+services\ClientWS.class
+services\ClientElement.class
+common\APIResponse.class
